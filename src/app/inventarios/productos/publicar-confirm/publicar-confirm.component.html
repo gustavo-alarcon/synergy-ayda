@@ -1,0 +1,16 @@
+<div class="loadingSpinner" *ngIf="isLoadingResults">
+  <mat-spinner></mat-spinner>
+</div>
+<div>
+  <div mat-dialog-title class="header">
+    <h1 style="width: 100%;">Publicar paquete</h1>
+  </div>
+  <hr>
+  <mat-dialog-content>
+    <h2 *ngIf="productosFiltrados.length == 0">No hay productos sin numero de serie</h2>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" [disabled]="stockDisponible == false" (click)="publicarPaq()">Generar</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
+  </div>
+</div>

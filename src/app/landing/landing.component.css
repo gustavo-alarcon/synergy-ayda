@@ -1,0 +1,29 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.buttonPOS {
+  border-radius: 50%;
+  transform-origin: center -200px;
+  perspective: 1000px;
+}
+
+.historial {
+  position: absolute;
+  top: -15px;
+  left: 80%;
+}
+
+.pos {
+  position: absolute;
+  top: -15px;
+  right: 80%;
+}
+
+.showButton {
+  display: block;
+}
+
+.hideButton {
+  display: none;
+}

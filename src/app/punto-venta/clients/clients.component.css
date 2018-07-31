@@ -1,0 +1,40 @@
+mat-cell {
+  padding: 5px;
+  justify-content: center;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-row:hover {
+  background: rgb(201, 199, 199);
+  cursor: pointer;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+
+.mat-dialog-title {
+  margin: 0 0 5px;
+}
+
+h1 {
+  margin: 0;
+}
+
+hr {
+  margin-bottom: 5px;
+}

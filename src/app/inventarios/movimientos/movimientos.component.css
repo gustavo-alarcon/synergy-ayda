@@ -1,0 +1,36 @@
+.full {
+  width: 100%;
+}
+
+.fullDiv {
+  width: 49%;
+}
+
+.containerProducts {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.fifth {
+  float: left;
+  width: 100%;
+}
+
+.flexRow {
+  display: block;
+}
+
+@media screen and (max-width: 700px) {
+  .fullDiv {
+    width: 100%;
+  }
+}
+
+@media (min-width: 601px) {
+  .fifth {
+    width: 19.95%;
+  }
+}

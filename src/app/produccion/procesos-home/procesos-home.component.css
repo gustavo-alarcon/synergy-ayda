@@ -1,0 +1,28 @@
+.marginButton {
+  margin-right: 30px;
+}
+
+.widthButton {
+  width: 20%;
+}
+
+.marginTop {
+  margin-top: 20px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.fontChange {
+  font: 500 25px/32px Roboto, "Helvetica Neue", sans-serif;
+  margin: 30px 0 30px 0;
+}
+
+.containerProcesos {
+  padding: 5px 0 5px 0;
+}
+
+.marginIcon {
+  margin-right: 10px;
+}

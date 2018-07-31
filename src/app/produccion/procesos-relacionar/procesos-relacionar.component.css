@@ -1,0 +1,15 @@
+.optionsLine {
+  width: 45%;
+}
+.fullWidth {
+  width: 100%;
+}
+.optionsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.spaceStatus {
+  margin-right: 15px;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}

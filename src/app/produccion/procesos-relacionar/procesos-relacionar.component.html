@@ -1,0 +1,63 @@
+<div>
+  <h1 mat-dialog-title>Relacionar procesos con productos</h1>
+  <hr>
+  <mat-dialog-content>
+    <mat-form-field class="fullWidth">
+      <mat-select placeholder="Proceso">
+        <mat-option value="proceso">
+          Proceso 1
+        </mat-option>
+        <mat-option value="proceso">
+          Proceso 2
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <hr>
+    <h2 class="spaceStatus">Lista de productos relacionados</h2>
+    <mat-table [dataSource]="dataSource" style="text-align: center; width: 100%;">
+      <ng-container matColumnDef="num">
+        <mat-header-cell *matHeaderCellDef>Numero</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Fecha}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Usuario}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="borrar">
+        <mat-header-cell *matHeaderCellDef>Borrar</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let sale; columns: displayedColumns;" [ngClass]="{deleted : sale.Estado == '1'}"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+    <hr>
+    <h2 class="spaceStatus">Agregar Productos al proceso</h2>
+    <mat-form-field class="fullWidth">
+      <mat-select placeholder="Producto">
+        <mat-option value="proceso">
+          Producto 1
+        </mat-option>
+        <mat-option value="Producto">
+          Producto 2
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">CANCELAR</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" (click)="onSubmit()">GUARDAR</button>
+  </div>
+</div>

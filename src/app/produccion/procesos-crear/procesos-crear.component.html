@@ -1,0 +1,67 @@
+<div>
+  <h1 mat-dialog-title>Crear proceso</h1>
+  <hr>
+  <mat-dialog-content>
+    <div class="optionsContainer">
+      <mat-form-field class="optionsLine">
+        <input matInput placeholder="Codigo del proceso" />
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <input matInput placeholder="Nombre del proceso" />
+      </mat-form-field>
+    </div>
+    <mat-form-field class="fullWidth">
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10" placeholder="Descripcion"></textarea>
+    </mat-form-field>
+    <hr>
+    <h2 class="spaceStatus">Optimizacion</h2>
+    <div class="optionsContainer">
+      <mat-form-field class="optionsLine">
+        <input matInput placeholder="Codigo del proceso" />
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <input matInput placeholder="Nombre del proceso" />
+      </mat-form-field>
+    </div>
+    <mat-form-field class="fullWidth">
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10" placeholder="Descripcion"></textarea>
+    </mat-form-field>
+    <div class="buttonEnd">
+      <button style="margin-bottom: 15px;" mat-raised-button color="primary" (click)="onSubmit()">Agregar</button>
+    </div>
+    <hr>
+    <mat-table [dataSource]="dataSource" style="text-align: center; width: 100%;">
+      <ng-container matColumnDef="num">
+        <mat-header-cell *matHeaderCellDef>Numero</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Fecha}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Usuario}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="borrar">
+        <mat-header-cell *matHeaderCellDef>Borrar</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let sale; columns: displayedColumns;" [ngClass]="{deleted : sale.Estado == '1'}"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">CANCELAR</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" (click)="onSubmit()">CREAR</button>
+  </div>
+</div>

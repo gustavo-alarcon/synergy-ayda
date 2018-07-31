@@ -1,0 +1,56 @@
+<div>
+  <div mat-dialog-title class="header">  
+    <h1 style="width: 80%;">Lista de clientes</h1>
+    <mat-icon matTooltip="Agregar un cliente" matTooltipPosition="left" (click)="addClient()">add_box</mat-icon>
+  </div>
+  <hr>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-icon matPrefix>filter_list</mat-icon>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+    </mat-form-field>
+    <div class="loadingSpinner" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <mat-table [dataSource]="dataSource" *ngIfMediaQuery="'(min-width: 500px)'" style = "text-align: center;">
+      <ng-container matColumnDef="Identi">
+        <mat-header-cell *matHeaderCellDef>Num.</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.Identi}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="IdentiClass">
+        <mat-header-cell *matHeaderCellDef>Doc. Identi</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.IdentiClass}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.Nombre}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Direccion">
+        <mat-header-cell *matHeaderCellDef>Direccion</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.Direccion}}</mat-cell>
+      </ng-container>  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row (click)="selectCustomer(cliente)" matTooltip="Seleccione un cliente" matTooltipPosition="above" *matRowDef="let cliente; columns: displayedColumns;" ></mat-row>      
+    </mat-table>
+    <mat-table [dataSource]="dataSource" *ngIfMediaQuery="'(max-width: 499px)'" style = "text-align: center;">
+      <ng-container matColumnDef="Identi">
+        <mat-header-cell *matHeaderCellDef>Num.</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.Identi}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="IdentiClass">
+        <mat-header-cell *matHeaderCellDef>Doc. Identi</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.IdentiClass}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let cliente">{{cliente.Nombre}}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+      <mat-row (click)="selectCustomer(cliente)" matTooltip="Seleccione un cliente" matTooltipPosition="above" *matRowDef="let cliente; columns: displayedColumns2;" ></mat-row>      
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10]"></mat-paginator>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
+  </div>
+</div>

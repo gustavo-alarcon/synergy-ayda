@@ -1,0 +1,223 @@
+<div>
+  <h1 mat-dialog-title>OP-P 12342</h1>
+  <hr>
+  <mat-dialog-content>
+    <div class="containerOptions">
+      <mat-form-field class="optionsLine">
+        <mat-select placeholder="Productos">
+          <mat-option value="prodcuto">
+            Producto 1
+          </mat-option>
+          <mat-option value="prodcuto">
+            Producto 1
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <input matInput type="number" placeholder="Cantidad" />
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <mat-select placeholder="Almacen">
+          <mat-option value="alamcen">
+            Alamacen 1
+          </mat-option>
+          <mat-option value="alamcen">
+            Almacen 2
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <mat-select placeholder="Cliente">
+          <mat-option value="cliente">
+            Cliente 1
+          </mat-option>
+          <mat-option value="cliente">
+            Cliente 2
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="fullWidth">
+        <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10" placeholder="Descripcion"></textarea>
+      </mat-form-field>
+    </div>
+    <hr>
+    <div>
+      <span>
+        3 archivos adjuntos
+      </span>
+      <button mat-icon-button>
+        <mat-icon>cloud_download</mat-icon>
+      </button>
+    </div>
+    <div>
+      <div class="document">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span>Documento 1</span>
+        <button mat-icon-button>
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+      </div>
+      <div class="document">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span>Documento 2</span>
+        <button mat-icon-button>
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+      </div>
+      <div class="document">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span>Documento 3</span>
+        <button mat-icon-button>
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+    <h2 mat-dialog-title>Lista de materiales</h2>
+    <mat-table [dataSource]="dataSource" style="text-align: center; width: 100%;">
+      <ng-container matColumnDef="num">
+        <mat-header-cell *matHeaderCellDef>Numero</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Fecha}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cod">
+        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Usuario}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="material">
+        <mat-header-cell *matHeaderCellDef>Material</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="unidad">
+        <mat-header-cell *matHeaderCellDef>Unidad</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cant">
+        <mat-header-cell *matHeaderCellDef>Cantidad</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Serie}}-{{sale.Correlativo}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Cliente}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" style="margin : 0px" *matCellDef="let sale; let i=index">
+          <button *ngIf="sale.Estado == '0'" matTooltip="Anular" matTooltipPosition="above" mat-icon-button>
+            <mat-icon style="margin : 0px">remove_circle</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let sale; columns: displayedColumns;" [ngClass]="{deleted : sale.Estado == '1'}"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+    <div class="estadoLine">
+      <h2 class="spaceStatus">Optimizacion</h2>
+      <mat-form-field>
+        <mat-select placeholder="Estado">
+          <mat-option value="prodcuto">
+            Producto 1
+          </mat-option>
+          <mat-option value="prodcuto">
+            Producto 1
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="proccessSpacing">
+      <div class="proccessLine">
+        <span class="processName">Producto 1</span>
+        <mat-form-field class="proccessDocs">
+          <mat-select placeholder="Documentos">
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <mat-checkbox class="processCheck"></mat-checkbox>
+      </div>
+      <div class="proccessLine">
+        <span class="processName">Producto 2</span>
+        <mat-form-field class="proccessDocs">
+          <mat-select placeholder="Documentos">
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <mat-checkbox class="processCheck"></mat-checkbox>
+      </div>
+      <div class="proccessLine">
+        <span class="processName">Producto 3</span>
+        <mat-form-field class="proccessDocs">
+          <mat-select placeholder="Documentos">
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <mat-checkbox class="processCheck"></mat-checkbox>
+      </div>
+      <div class="proccessLine">
+        <span class="processName">Producto 4</span>
+        <mat-form-field class="proccessDocs">
+          <mat-select placeholder="Documentos">
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+            <mat-option value="prodcuto">
+              Producto 1
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <mat-checkbox class="processCheck"></mat-checkbox>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">CERRAR</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" (click)="generarORC()">GENERAR OR-C</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn">RECHAZAR</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary">APROBAR</button>
+  </div>
+</div>

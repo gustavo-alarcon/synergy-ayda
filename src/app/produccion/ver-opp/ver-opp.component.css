@@ -1,0 +1,50 @@
+.optionsLine {
+  width: 19%;
+}
+
+.containerOptions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.document {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.estadoLine {
+  display: flex;
+  align-items: center;
+}
+
+.spaceStatus {
+  margin-right: 15px;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.proccessSpacing {
+  margin-left: 20px;
+}
+
+.proccessLine {
+  display: flex;
+  align-items: center;
+}
+
+.processName {
+  width: 25%;
+}
+
+.proccessDocs {
+  width: 30%;
+  margin-right: 15px;
+}
+
+.processCheck {
+  margin-left: auto;
+}

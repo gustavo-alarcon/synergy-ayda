@@ -1,0 +1,126 @@
+@import "~@angular/material/theming";
+
+:host {
+  @include mat-elevation(2);
+  display: block;
+  background: #f9f9f9;
+  border-radius: 2px;
+  padding: 16px 24px 8px;
+  min-width: 240px;
+}
+
+.mat-subheading-2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.mat-form-field {
+  width: 100%;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  margin-right: -16px;
+}
+
+.listTotal {
+  text-align: right;
+  width: 98%;
+  display: inline-block;
+  color: #565656;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.listIGV {
+  width: 98%;
+  display: inline-block;
+  font-size: 18px;
+  text-align: right;
+  color: #565656;
+  font-weight: 500;
+}
+
+.listSubTotal {
+  width: 98%;
+  display: inline-block;
+  font-size: 16px;
+  text-align: right;
+  color: #565656;
+  font-weight: 500;
+}
+
+hr {
+  border-top: 2px solid #565656;
+  margin: 10px 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
+}
+
+h2 {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+detail-series {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.header {
+  background: #2a466b;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 15px;
+  justify-content: space-between;
+  display: flex;
+  border-radius: 10px 10px 0 0;
+  font-weight: 500;
+}
+
+.descripPadding {
+  padding: 5px 0 5px 20px;
+  color: #565656;
+  font-weight: 500;
+}
+
+.marginText {
+  margin-left: 15px;
+  color: #515151;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
+.paddingTable {
+  padding: 0 5px 0 5px;
+}
+
+th {
+  color: #565656;
+  font-weight: 500;
+}
+
+td {
+  color: #515151;
+  font-weight: 300;
+}
+
+.marginLeft {
+  margin-left: 5px;
+}
+
+.marginRight {
+  margin-right: 5px;
+}

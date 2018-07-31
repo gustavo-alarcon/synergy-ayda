@@ -1,0 +1,224 @@
+<mat-card>
+    <mat-card-header class="button-row">
+        <h2>Programacion de mensajes</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <section>
+            <div class="input button-row">
+                <mat-form-field>
+                    <mat-icon matPrefix>filter_list</mat-icon>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                </mat-form-field>
+                <mat-checkbox class="select" (change)="changeAll($event)" [(ngModel)]="all">Seleccionar todos</mat-checkbox>
+                <mat-checkbox class="select" (change)="changeFranchise($event)" [(ngModel)]="fran">Clientes Franquicia</mat-checkbox>
+                <mat-checkbox class="select" (change)="changeProm($event)" [(ngModel)]="prom">Clientes Promocion</mat-checkbox>
+                <button mat-raised-button color="primary" (click)="openDialog(0)">Programar seleccionados
+                    <mat-icon style="margin : 0">date_range</mat-icon>
+                </button>
+                <button mat-raised-button color="primary" (click)="openClient()">Agregar Clientes
+                    <mat-icon style="margin : 0">add_circle</mat-icon>
+                </button>
+                <mat-slide-toggle [checked]="edit" (change)="slideToogleChange($event)">Editar</mat-slide-toggle>
+            </div>
+            <div class="loadingSpinner" *ngIf="isLoadingResults">
+                <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+            </div>
+            <mat-table [dataSource]="dataSource" *ngIfMediaQuery="'(min-width: 500px)'" matSort style="text-align: center;">
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Name">
+                            {{cliente.Name}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Name">
+                            Editar nombre
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Name" type="nombre" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="mail">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Mail">
+                            {{cliente.Mail}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Mail">
+                            Editar correo
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Mail" type="correo" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="phone">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Phone">
+                            {{cliente.Phone}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Phone">
+                            Editar telefono
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Phone" type="telefono" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="place">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Lugar</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Place">
+                            {{cliente.Place}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Place">
+                            Editar lugar
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Place" type="lugar" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="birthday">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de nacimiento</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Birthday">
+                            {{cliente.Birthday}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Birthday">
+                            Editar cumpleaños
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Birthday" type="cumple" [client]="cliente" [db]="bd" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)" class="type">
+                        <ng-container *ngIf="cliente.Type">
+                            <span *ngIf="cliente.Type==1">Franquicia</span>
+                            <span *ngIf="cliente.Type==2">Promociones</span>
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Type">
+                            Editar tipo
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Type" type="tipo" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="seleccionar">
+                    <mat-header-cell *matHeaderCellDef>Seleccionar</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente; let i=index">
+                        <mat-checkbox [(ngModel)]="cliente.select" (change)="confirmAll($event,cliente.Type)"></mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="eliminar">
+                    <mat-header-cell *matHeaderCellDef>Eliminar</mat-header-cell>
+                    <mat-cell matTooltip="Eliminar" matTooltipPosition="above" *matCellDef="let cliente; let i=index" (click)="deleteCustomer(cliente)">
+                        <mat-icon>remove_circle</mat-icon>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row [matTooltip]="message1" matTooltipPosition="above" *matRowDef="let cliente; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-table [dataSource]="dataSource" *ngIfMediaQuery="'(max-width: 499px)'" matSort style="text-align: center;">
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Name">
+                            {{cliente.Name}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Name">
+                            Editar nombre
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Name" type="nombre" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="phone">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)">
+                        <ng-container *ngIf="cliente.Phone">
+                            {{cliente.Phone}}
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Phone">
+                            Editar telefono
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Phone" type="telefono" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente" [satPopoverAnchorFor]="p" (click)=" edit ? p.open() : openDialog(cliente)" class="type">
+                        <ng-container *ngIf="cliente.Type">
+                            <span *ngIf="cliente.Type==1">Franquicia</span>
+                            <span *ngIf="cliente.Type==2">Promociones</span>
+                        </ng-container>
+                        <span class="add-comment" *ngIf="!cliente.Type">
+                            Editar tipo
+                        </span>
+                        <sat-popover #p hasBackdrop xAlign="start" yAlign="start">
+                            <inline-edit [value]="cliente.Type" type="tipo" [client]="cliente" [db]="bd"></inline-edit>
+                        </sat-popover>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="seleccionar">
+                    <mat-header-cell *matHeaderCellDef>Seleccionar</mat-header-cell>
+                    <mat-cell *matCellDef="let cliente; let i=index">
+                        <mat-checkbox [(ngModel)]="cliente.select" (change)="confirmAll($event,cliente.Type)"></mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="eliminar">
+                    <mat-header-cell *matHeaderCellDef>Eliminar</mat-header-cell>
+                    <mat-cell matTooltip="Eliminar" matTooltipPosition="above" *matCellDef="let cliente; let i=index" (click)="deleteCustomer(cliente)">
+                        <mat-icon>remove_circle</mat-icon>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                <mat-row [matTooltip]="message1" matTooltipPosition="above" *matRowDef="let cliente; columns: displayedColumns2;"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5,10]"></mat-paginator>
+        </section>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-header class="button-row">
+        <h2>Uso de la cuenta</h2>
+        <button matTooltip="Recargar Valores" matTooltipPosition="above" mat-icon-button (click)="getBubbleValues()" color="primary">
+            <mat-icon class="reload">autorenew</mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="loadingSpinner" *ngIf="isLoadingBubbles">
+            <mat-spinner *ngIf="isLoadingBubbles"></mat-spinner>
+        </div>
+        <section class="stats">
+            <div class="bubbleContainer">
+                <div class="bubble red">
+                    <span class="bubbleText">{{balance}}</span>
+                </div>
+                <h4 class="description">Cantidad de mensajes restantes
+                    <br/>( Saldo )</h4>
+            </div>
+            <div class="bubbleContainer">
+                <div class="bubble green">
+                    <span class="bubbleText">{{programmed}}</span>
+                </div>
+                <h4 class="description">Cantidad de mensajes programados para mandar</h4>
+            </div>
+            <div class="bubbleContainer">
+                <div class="bubble blue">
+                    <span class="bubbleText">{{send}}</span>
+                </div>
+                <h4 class="description">Cantidad de mensajes enviados</h4>
+            </div>
+        </section>
+    </mat-card-content>
+</mat-card>

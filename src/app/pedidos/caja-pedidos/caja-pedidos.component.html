@@ -1,0 +1,371 @@
+<div class='main w3-sand'>
+  <div class="container">
+    <div *ngIfMediaQuery="'(max-width: 700px)'" class="hide" (click)="hideProductsChange()">
+      <mat-icon [ngClass]="{ rotateIcon : hideProducts}">last_page</mat-icon>
+    </div>
+    <div class="products" [ngClass]="{hideProducts : hideProducts}">
+      <div class="loadingSpinner" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      </div>
+      <div *ngIfMediaQuery="'(max-width: 700px)'">
+        <mat-grid-list cols="2" rowHeight="150px" gutterSize="3px">
+          <div *ngIf='productsOrPackages==0'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredOptions; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                alt="">
+              <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }} | Stock : {{option.Stock_actual}}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+          <div *ngIf='productsOrPackages==1'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <span class="packageProducts">
+                Productos :
+                <span *ngFor="let product of option.Productos">
+                  {{product.nombre}}
+                </span>
+              </span>
+              <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                                alt=""> -->
+              <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </div>
+      <div *ngIfMediaQuery="'(min-width: 701px) and (max-width: 1000px)'">
+        <mat-grid-list cols="3" rowHeight="200px" gutterSize="3px">
+          <div *ngIf='productsOrPackages==0'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredOptions ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                alt="">
+              <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }} | Stock : {{option.Stock_actual}}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+          <div *ngIf='productsOrPackages==1'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <span class="packageProducts">
+                Productos :
+                <span *ngFor="let product of option.Productos">
+                  {{product.nombre}}
+                </span>
+              </span>
+              <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                                alt=""> -->
+              <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </div>
+      <div *ngIfMediaQuery="'(min-width: 1001px) and (max-width: 1299px)'">
+        <mat-grid-list cols="4" rowHeight="200px" gutterSize="3px">
+          <div *ngIf='productsOrPackages==0'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredOptions ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                alt="">
+              <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }} | Stock : {{option.Stock_actual}}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+          <div *ngIf='productsOrPackages==1'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <span class="packageProducts">
+                Productos :
+                <span *ngFor="let product of option.Productos">
+                  {{product.nombre}}
+                </span>
+              </span>
+              <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                                alt=""> -->
+              <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </div>
+      <div *ngIfMediaQuery="'(min-width: 1300px)'">
+        <mat-grid-list cols="5" rowHeight="200px" gutterSize="3px">
+          <div *ngIf='productsOrPackages==0'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredOptions ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                alt="">
+              <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }} | Stock : {{option.Stock_actual}}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+          <div *ngIf='productsOrPackages==1'>
+            <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
+              <mat-grid-tile-header>
+                <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                Precio : S/. {{option.Venta}}
+              </mat-grid-tile-header>
+              <span class="packageProducts">
+                Productos :
+                <span *ngFor="let product of option.Productos">
+                  {{product.nombre}}
+                </span>
+              </span>
+              <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                                alt=""> -->
+              <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+              <mat-grid-tile-footer>
+                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}</h3>
+                <mat-icon>star_border</mat-icon>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </div>
+        </mat-grid-list>
+      </div>
+    </div>
+    <div class="panel" [ngClass]="{expandPanel : hideProducts}">
+      <div class="panelInt">
+        <div (click)="executeOperation('1')" class="teclado one">
+          1
+        </div>
+        <div (click)="executeOperation('2')" class="teclado two">
+          2
+        </div>
+        <div (click)="executeOperation('3')" class="teclado three">
+          3
+        </div>
+        <div (click)="executeOperation('4')" class="teclado four">
+          4
+        </div>
+        <div (click)="executeOperation('5')" class="teclado five">
+          5
+        </div>
+        <div (click)="executeOperation('6')" class="teclado six">
+          6
+        </div>
+        <div (click)="executeOperation('7')" class="teclado seven">
+          7
+        </div>
+        <div (click)="executeOperation('8')" class="teclado eight">
+          8
+        </div>
+        <div (click)="executeOperation('9')" class="teclado nine">
+          9
+        </div>
+        <div class="teclado plus" (click)="addPlusOrNegative()">
+          +/-
+        </div>
+        <div (click)="executeOperation('0')" class="teclado zero">
+          0
+        </div>
+        <div class="teclado point" (click)="executeOperation('.')">
+          .
+        </div>
+        <div class="customer teclado" (click)="openClients()">
+          <mat-icon>account_circle</mat-icon>
+          <input type="text" class='nameIcon' [formControl]="client">
+        </div>
+        <div class="payment teclado" (click)="generateOrder()">
+          <mat-icon>add_circle</mat-icon>
+          <span class='nameIcon'>Generar</span>
+        </div>
+        <div class="qty" (click)="changeOperationType(1)" [ngClass]="{operationFocused : operationOption == 1, teclado : operationOption != 1}">
+          Cant
+        </div>
+        <div class="disc" (click)="changeOperationType(2)" [ngClass]="{operationFocused : operationOption == 2, teclado : operationOption != 2}">
+          Desc
+        </div>
+        <div class="price2" (click)="changeOperationType(3)" [ngClass]="{operationFocused : operationOption == 3, teclado : operationOption != 3}">
+          Precio
+        </div>
+        <div (click)="backspace()" class="teclado back">
+          <mat-icon>backspace</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="filtro" [formGroup]="movimientoForm" [ngClass]="{hideFilter : hideProducts}">
+      <div class="flex">
+        <mat-form-field class="full-width2">
+          <mat-select #almOrigen placeholder="Almacenes" panelClass="colorSelect" (selectionChange)="filtrarProductos(almOrigen.value)"
+            [(ngModel)]='selectedWarehouse' [ngModelOptions]="{standalone: true}" [disabled]="isLoadingResults">
+            <mat-option style="color : #fff" *ngFor="let almacen_d of almacenes" [value]="almacen_d.Nombre">{{ almacen_d.Nombre }}</mat-option>
+          </mat-select>
+          <mat-icon class="warehouseIcon" matPrefix>account_balance</mat-icon>
+        </mat-form-field>
+        <mat-slide-toggle [disabled]="disabledToogle" [checked]="checked" matTooltip="Solo para los productos" matTooltipPosition="above"
+          labelPosition='before' (change)="slideToogleChange($event)">{{ optionDisplay == 1 ? 'Nombre' : 'Codigo' }}</mat-slide-toggle>
+      </div>
+      <mat-tab-group (selectedTabChange)="onTabClick($event)" class="labelEdit changeBar">
+        <mat-tab label="Productos">
+          <div class="insideFiltro">
+            <div class="productOptions">
+              <mat-form-field class="full-width">
+                <input matInput (keyup)="pushKeyProducts()" (keyup.enter)="enterProduct()" [matAutocomplete]="auto" #prod formControlName="Producto"
+                  placeholder="Buscar productos">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option (click)="pushKeyProducts()" class="autoClass" *ngFor="let option of filteredOptions" [value]=" optionDisplay == 2 ? option.Codigo : option.Nombre ">
+                    <span style="font-size: 13px;">{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}</span> |
+                    <span style="font-size: 13px;"> {{option.Stock_actual}}</span> |
+                    <span style="font-size: 13px;"> {{option.Unidad}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-icon class="warehouseIcon" matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Paquetes">
+          <div class="insideFiltro">
+            <div class="productOptions">
+              <mat-form-field class="full-width">
+                <input matInput (keyup)="pushKeyPackage()" [matAutocomplete]="auto2" #packNombre formControlName="Paquete" placeholder="Buscar paquetes">
+                <mat-autocomplete #auto2="matAutocomplete">
+                  <mat-option (click)="pushKeyPackage()" class="autoClass" *ngFor="let pack of filteredPackages" [value]="pack.Nombre">
+                    <span style="font-size: 13px;">{{pack.Nombre}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-icon class="warehouseIcon" matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="check" [ngClass]="{expandCheck : hideProducts}">
+      <div class="customerMedia">
+        <input type="text" class='clientInCheck' [formControl]="client" style="background: #fdf5e6; text-align: center; color : #555555">
+      </div>
+      <ul [formGroup]="formSelectNumSeries" style='padding-left: 0;'>
+        <div formArrayName="numSeriesArray" @cardProduct *ngFor="let product of listCustomers[currentCustomer].listAction; let i = index">
+          <li [formGroupName]="i" class="productList" (click)='clickProductList(i)' [ngClass]="{'newBackground' : listCustomers[currentCustomer].lastItemClicked == product.id }">
+            <div class="loadingSpinner" *ngIf="isLoadingResultsCheck[i]">
+              <mat-spinner *ngIf="isLoadingResultsCheck[i]"></mat-spinner>
+            </div>
+            <span class="productName">{{product.product}}</span>
+            <span class="productClass">$ {{product.price == '' ? '0' : product.price}}</span>
+            <div style="display: flex; align-items: center; justify-content: center; width: 90%;">
+              <mat-form-field *ngIf='product.package != 1' color="accent" style="width : 100%">
+                <mat-select placeholder="Numeros de serie" multiple formControlName="numSeriesSelected" (selectionChange)="valueSerie(i)">
+                  <mat-select-trigger>
+                    <span>
+                      {{formSelectNumSeries.get('numSeriesArray').value[i].numSeriesSelected ? formSelectNumSeries.get('numSeriesArray').value[i].numSeriesSelected.length
+                      : '0'}} {{product.Unidad}} $ {{product.unitPrice == '' ? '0' : product.unitPrice }} c/u
+                    </span>
+                  </mat-select-trigger>
+                  <div *ngFor="let serie of product.listNumSeries; let i = index">
+                    <mat-option *ngIf="serie.almacen == selectedWarehouse" [value]="serie.numSerie">
+                      <span>Numero de serie : {{serie.numSerie}}</span>
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <span class="productInfo">{{product.units == '' ? '0' : product.units }} {{product.Unidad}} $ {{product.unitPrice == '' ? '0' : product.unitPrice
+              }} c/u</span>
+            <span *ngIf="product.dsc != ''" class="productInfo">{{product.dsc}}% de descuento</span>
+            <span *ngIf="product.products" class="productInfo">Items en el paquete:</span>
+            <div *ngIf="product.products" class="tableProducts">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Unidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let productPaquete of product.products">
+                    <td style="border-radius: 5px;">{{productPaquete.nombre}}</td>
+                    <td style="border-radius: 5px;">{{productPaquete.precio}}</td>
+                    <td style="border-radius: 5px;">{{productPaquete.cantidad}}</td>
+                    <td style="border-radius: 5px;">{{productPaquete.Unidad}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+          <hr style="margin: 10px;" />
+        </div>
+      </ul>
+      <div @totalTaxes *ngIf="listCustomers[currentCustomer].listAction.length != 0" class='listSummary'>
+        <div class="listRadios">
+          <mat-radio-group [(ngModel)]="listCustomers[currentCustomer].igvType" (change)="changeIGVType()">
+            <mat-radio-button value=1>Incluir IGV</mat-radio-button>
+            <mat-radio-button value=2>Calcular IGV</mat-radio-button>
+            <mat-radio-button value=3>Sin IGV</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <span @fadeList *ngIf="listCustomers[currentCustomer].igvType != 3" class='listSubTotal'>Sub-total: $ {{listCustomers[currentCustomer].subtotal}}</span>
+        <span @fadeList *ngIf="listCustomers[currentCustomer].igvType != 3" class='listIGV'>IGV: $ {{listCustomers[currentCustomer].taxes}}</span>
+        <span class='listTotal'>Total: $ {{listCustomers[currentCustomer].total}}</span>
+      </div>
+    </div>
+    <div class="tab">
+      <mat-tab-group class="changeBar" [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabChanged($event)" #tab>
+        <mat-tab *ngFor="let customer of listCustomers; let i = index">
+          <ng-template mat-tab-label>
+            <a @tab class="tabName" (click)="onSelectCustomer(i)">
+              {{i+1}}
+            </a>
+            <a class="delete" @tab *ngIf="i != 0" (click)="eraseCustomer(i)">
+              <mat-icon class="tabIcon">highlight_off</mat-icon>
+            </a>
+          </ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <a class="tabName" (click)="addCustomer()">
+              <mat-icon class="tabIcon deleteTab">add_circle</mat-icon>
+            </a>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div>
+  <h1 mat-dialog-title>Generar OR-C</h1>
+  <hr>
+  <mat-dialog-content>
+    <mat-table [dataSource]="dataSource" style="text-align: center; width: 100%;">
+      <ng-container matColumnDef="num">
+        <mat-header-cell *matHeaderCellDef>Numero</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Fecha}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cod">
+        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Usuario}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="material">
+        <mat-header-cell *matHeaderCellDef>Unidad</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="unidad">
+        <mat-header-cell *matHeaderCellDef>Unidad</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Documento}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cant">
+        <mat-header-cell *matHeaderCellDef>Cantidad</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          <span>{{sale.Serie}}-{{sale.Correlativo}}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+          {{sale.Cliente}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="req">
+        <mat-header-cell *matHeaderCellDef>Requerimiento</mat-header-cell>
+        <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" style="margin : 0px" *matCellDef="let sale; let i=index">
+          <mat-form-field class="optionsLine">
+            <input matInput type="number" placeholder="Cantidad" />
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let sale; columns: displayedColumns;" [ngClass]="{deleted : sale.Estado == '1'}"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">CANCELAR</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" (click)="confirmarORC()">GENERAR</button>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="w3-animate-top">
+    <div class="w3-container w3-border-bottom w3-border-black">
+        <h3 mat-button class="meraki-font-s5">Crear nuevo paquete</h3>
+    </div>
+    <br>
+
+    <div class="w3-white w3-card-4 w3-padding">
+        <h4>Paquete</h4>
+        <mat-form-field color="accent" class="meraki-fill">
+            <mat-select #Alm placeholder="Almacen" (selectionChange)="filtrarProductos(Alm.value)">
+                <mat-option class="w3-indigo w3-hover-gray" *ngFor="let almacen of almacenes" [value]="almacen.Nombre">{{ almacen.Nombre }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="meraki-fill">
+            <input matInput (input)="pack = $event.target.value" type="text" placeholder="Nombre">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="agregarItem()">
+            Agregar item
+        </button>
+
+        <br>
+        <br>
+        <div class="w3-row" *ngFor="let item of items; let i = index">
+            <div class="w3-third">
+                <mat-form-field color="accent" class="meraki-fill">
+                    <mat-select #Prod (selectionChange)="setProduct(Prod.value, i)" placeholder="Producto">
+                        <mat-option class="w3-indigo w3-hover-gray" *ngFor="let producto of productos_filtrado" [value]="producto">{{ producto.Nombre }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="w3-third">
+                <mat-form-field color="accent" class="meraki-fill">
+                    <input matInput #Cant (input)="items[i]['Cantidad'] = $event.target.value; calcInver(Prod.value.Compra * Cant.value, i)" type="number" [placeholder]="Prod.value === undefined ? 'Cantidad':Prod.value.Unidad">
+                </mat-form-field>
+                <br>
+            </div>
+
+            <div class="w3-third">
+                <mat-form-field color="accent" class="meraki-fill">
+                    <input matInput (input)="items[i]['PrecioUnitario'] = $event.target.value" type="number" [placeholder]="Prod.value === undefined ? '(Precio de compra) x (Cantidad)':'P.Compra:'+ Prod.value.Compra + ' x Cant.:' + Cant.value + '='" [value]="Prod.value === undefined ? '':(Prod.value.Compra * Cant.value)">
+                </mat-form-field>
+                <br>
+            </div>
+        </div>
+        <div style="display:flex; justify-content: flex-end">
+            <h4 style="padding:0.5em">Total invertido: </h4>
+            <mat-form-field color="accent" style="padding:0.5em">
+                <input matInput [value]="totalInvertido" type="number" placeholder="Sumatoria" disabled>
+            </mat-form-field>
+            <!--p style="padding:0.5em">{{ totalInvertido }}</p-->
+        </div>
+        <div style="display:flex; justify-content: flex-end">
+            <h4 style="padding:0.5em">Precio de Venta: </h4>
+            <mat-form-field color="accent" style="padding:0.5em">
+                <input matInput (input)="precioVenta = $event.target.value; setUtilidad($event.target.value)" type="number" placeholder="Asignar cantidad" [value]="precioVenta">
+            </mat-form-field>
+        </div>
+           
+        <div style="display:flex; justify-content: flex-end">
+            <h4 style="padding:0.5em">Utilidad: </h4>
+            <mat-form-field color="accent" style="padding:0.5em">
+                <input matInput (input)="utilidad = $event.target.value; setPrecioVenta($event.target.value)" type="number" placeholder="Asignar cantidad" [value]="utilidad">
+            </mat-form-field>
+            <!--p style="padding:0.5em">{{ precioVenta - totalInvertido }}</p-->
+            
+        </div>
+            
+
+    </div>
+    <br>
+    <button mat-raised-button color="warn" routerLink="../../productos" style="margin: 0 0.5em 0 0.5em">CANCELAR</button>
+    <button mat-raised-button (click)="guardarPaquete()" color="primary" style="margin: 0 0.5em 0 0.5em">CREAR</button>
+
+
+</div>

@@ -1,0 +1,43 @@
+<div>
+  <h1 mat-dialog-title>Generar OR-P</h1>
+  <hr>
+  <mat-dialog-content>
+    <div class="containerOptions">
+      <mat-form-field class="optionsLine">
+        <mat-select placeholder="Productos">
+          <mat-option *ngFor="let prod of productos; let i = index" value="prod.Nombre">
+            {{ prod.Nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <input matInput type="number" placeholder="Cantidad" />
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="optionsLine">
+        <mat-select placeholder="Almacen">
+          <mat-option *ngFor="let alm of almacenes" value="alm.Nombre">
+            {{ alm.Nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="fullWidth">
+        <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10" placeholder="Descripción"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="image">
+      <image-upload [buttonCaption]="'Adjunte los documentos necesarios'" [dropBoxMessage]="'Arraste los documentos necesarios'"
+        [clearButtonCaption]="'Borrar'" [style]="inputFile" [max]="10" (uploadFinished)="imageFinishedUploading($event)" (removed)="onRemoved()"></image-upload>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">CANCELAR</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" (click)="onSubmit()">GENERAR</button>
+  </div>
+</div>

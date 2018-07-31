@@ -1,0 +1,35 @@
+<mat-sidenav-container class="w3-row w3-sand" style="min-height:100vh;width:100%">
+  <mat-sidenav mode="over" #sidenav class="w3-row">
+    <div class="w3-row w3-padding meraki-font-s5 w3-pink">Menu de Pedidos</div>
+    <button mat-button class="w3-block w3-left-align" (click)="changePage(1)">
+      <mat-icon>playlist_add</mat-icon> Generar Pedido</button>
+    <br>
+    <button mat-button class="w3-block w3-left-align" (click)="changePage(2)">
+      <mat-icon>list</mat-icon> Lista de pedidos a hacer</button>
+    <br>
+    <button mat-button class="w3-block w3-left-align" (click)="changePage(3)">
+      <mat-icon>playlist_add_check</mat-icon> Lista de pedidos a pagar</button>
+    <br>
+  </mat-sidenav>
+  <div class="w3-container w3-white w3-card-4 w3-animate-top mainPadding" style="border-radius:0px 0px 10px 10px">
+    <div class="row middle-xs w3-bar" style="padding:12px 24px">
+      <button type="button" mat-button (click)="sidenav.open()">
+        <mat-icon>menu</mat-icon>
+        <span class="w3-xlarge meraki-font-s5"> Sistema de pedidos</span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="container" [@routerAnimation]="getRouteAnimation()">
+      <section *ngIf="toogle=='1'">
+        <caja-pedidos></caja-pedidos>
+      </section>
+      <section class="mainPadding" *ngIf="toogle=='2'">
+        <lista-pedidos></lista-pedidos>
+      </section>
+      <section class="mainPadding" *ngIf="toogle=='3'">
+        <lista-pedidos-pagar></lista-pedidos-pagar>
+      </section>
+    </div>
+  </div>
+</mat-sidenav-container>

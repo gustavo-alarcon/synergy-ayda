@@ -1,0 +1,12 @@
+.optionsLine {
+  width: 23%;
+}
+
+.containerOptions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fullWidth {
+  width: 100%;
+}

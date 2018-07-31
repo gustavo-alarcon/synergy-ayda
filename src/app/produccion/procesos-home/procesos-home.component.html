@@ -1,0 +1,56 @@
+<div class="containerProcesos">
+  <div class="w3-row w3-border-bottom">
+    <span class="meraki-spacer"></span>
+    <h3 class="meraki-font-s5 w3-right">Procesos</h3>
+  </div>
+  <div class="marginTop">
+    <button mat-raised-button color="primary" class="marginButton widthButton" (click)="crearProceso()">
+      Crear proceso
+    </button>
+    <button mat-raised-button color="primary" class="widthButton" (click)="relacionarProceso()">
+      Proceso - Producto
+    </button>
+  </div>
+  <div>
+    <h2 class="fontChange">Lista de procesos</h2>
+  </div>
+  <mat-card>
+    <mat-card-content>
+      <section>
+        <mat-form-field class="fullWidth">
+          <mat-icon class="marginIcon" matPrefix>filter_list</mat-icon>
+          <input matInput placeholder="Filtrar">
+        </mat-form-field>
+        <mat-table [dataSource]="dataSource" style="text-align: center; width: 100%;">
+          <ng-container matColumnDef="num">
+            <mat-header-cell *matHeaderCellDef>Numero</mat-header-cell>
+            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+              {{sale.Fecha}}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="cod">
+            <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+              {{sale.Usuario}}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="proceso">
+            <mat-header-cell *matHeaderCellDef>Proceso</mat-header-cell>
+            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+              <span>{{sale.Documento}}</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="productos">
+            <mat-header-cell *matHeaderCellDef>Productos</mat-header-cell>
+            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+              <span>{{sale.Documento}}</span>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let sale; columns: displayedColumns;" [ngClass]="{deleted : sale.Estado == '1'}"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

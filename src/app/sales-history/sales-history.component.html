@@ -1,0 +1,87 @@
+<div class="w3-sand">
+    <div class="w3-container w3-white w3-card-4" style="margin-left:5vw;margin-right:5vw;border-radius:0px 0px 10px 10px">
+        <div class="row middle-xs w3-bar" style=" padding:12px 24px ; display : flex ; justify-content : space-between">
+            <span style="width: 100% ; display : flex ; justify-content : space-between" class="w3-xlarge meraki-font-s5">
+                <div>
+                    Historial de ventas
+                </div>
+                <div>
+                    <button matTooltip="Caja" matTooltipPosition="left" matTooltipClass="tooltip" mat-icon-button style="margin : 0px" (click)="abrirCaja()">
+                        <mat-icon style="margin-right: 0px;">lock</mat-icon>
+                    </button>
+                    <button matTooltip="Ventas" matTooltipPosition="left" matTooltipClass="tooltip" mat-icon-button routerLink="/puntoVenta"
+                        style="margin : 0px">
+                        <mat-icon style="margin-right: 0px;">shopping_cart</mat-icon>
+                    </button>
+                </div>
+            </span>
+        </div>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <section style="margin: 10px 0px;">
+                <div class="input button-row">
+                    <mat-form-field>
+                        <mat-icon matPrefix>filter_list</mat-icon>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                    </mat-form-field>
+                </div>
+                <div class="loadingSpinner" *ngIf="isLoadingResults">
+                    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+                </div>
+                <div style="overflow: auto; width: 100%;">
+                    <mat-table [dataSource]="dataSource" style="text-align: center; width: 100%;">
+                        <ng-container matColumnDef="fecha">
+                            <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+                            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+                                {{sale.Fecha}}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="usuario">
+                            <mat-header-cell *matHeaderCellDef>Usuario</mat-header-cell>
+                            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+                                {{sale.Usuario}}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="type">
+                            <mat-header-cell *matHeaderCellDef>Tipo de Doc.</mat-header-cell>
+                            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+                                <span>{{sale.Documento}}</span>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="correlativo">
+                            <mat-header-cell *matHeaderCellDef>Número</mat-header-cell>
+                            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" style="display: flex; justify-content: center; align-items: center; flex-wrap : wrap"
+                                *matCellDef="let sale; let i=index" [satPopoverAnchorFor]="p">
+                                <span>{{sale.Serie}}-{{sale.Correlativo}}</span>
+                                <button matTooltip="Detalles" matTooltipPosition="above" mat-icon-button style="margin : 0px" (click)="p.open()">
+                                    <mat-icon style="margin-right: 0px;">keyboard_arrow_down</mat-icon>
+                                </button>
+                                <sat-popover #p hasBackdrop>
+                                    <detail-products [value]="sale.Operacion" [data]="sale"></detail-products>
+                                </sat-popover>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="cliente">
+                            <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+                            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" *matCellDef="let sale; let i=index">
+                                {{sale.Cliente}}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="eliminar">
+                            <mat-header-cell *matHeaderCellDef>Anular</mat-header-cell>
+                            <mat-cell [ngClass]="{changeColorFont : sale.Estado == '1'}" style="margin : 0px" *matCellDef="let sale; let i=index">
+                                <button *ngIf="sale.Estado == '0'" matTooltip="Anular" matTooltipPosition="above" mat-icon-button (click)="changeState(sale)">
+                                    <mat-icon style="margin : 0px">remove_circle</mat-icon>
+                                </button>
+                            </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let sale; columns: displayedColumns;" [ngClass]="{deleted : sale.Estado == '1'}"></mat-row>
+                    </mat-table>
+                </div>
+                <mat-paginator [pageSizeOptions]="[5,10]"></mat-paginator>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>
