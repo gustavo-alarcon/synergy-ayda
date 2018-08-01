@@ -25,7 +25,6 @@ export class PublicarConfirmComponent implements OnInit {
   ngOnInit() {}
 
   revisarStock(cantidad) {
-    console.log(this.data);
     if (cantidad) {
       for (let i = 0; i < this.data.products.length; i++) {
         for (let j = 0; j < this.data.paquete.length; j++) {
