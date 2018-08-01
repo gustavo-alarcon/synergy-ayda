@@ -7,10 +7,16 @@
   </div>
   <hr>
   <mat-dialog-content>
-    <h2 *ngIf="productosFiltrados.length == 0">No hay productos sin numero de serie</h2>
+    <mat-form-field class="fullWidth">
+      <input #input matInput type="number" (input)="revisarStock(input.value)" placeholder="Ingresa la cantidad esperada" />
+    </mat-form-field>
+    <h5 class="alert" *ngIf="stockDisponible == 1">
+      No tiene el stock suficiente para publicar este paquete
+    </h5>
   </mat-dialog-content>
   <div mat-dialog-actions align="end">
-    <button style="margin-bottom: 15px;" mat-raised-button color="primary" [disabled]="stockDisponible == false" (click)="publicarPaq()">Generar</button>
+    <button style="margin-bottom: 15px;" mat-raised-button color="primary" [disabled]="stockDisponible == 0 || stockDisponible == 1"
+      (click)="publicarPaq()">Publicar</button>
     <button style="margin-bottom: 15px;" mat-raised-button color="warn" (click)="onNoClick()">Cancelar</button>
   </div>
 </div>
