@@ -50,10 +50,11 @@ export class PublicarConfirmComponent implements OnInit {
   }
 
   publicarPaq() {
-    //this.inventariosService.publicarPaquete();
+    this.inventariosService.publicarPaquete(this.data.packData[0]);
+    this.DialogRef.close();
   }
 
   onNoClick() {
-    this.DialogRef.close("false");
+    this.DialogRef.close();
   }
 }

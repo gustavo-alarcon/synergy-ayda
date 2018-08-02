@@ -781,11 +781,13 @@ export class InventariosService {
         res => {
           this.toastr.success(res, "Exito");
           this.getPaquetes();
+          return true;
         },
         err => {
           this.toastr.error("Error de conexión ", "Error");
           console.log(err);
           this.queryLoading(false);
+          return false;
         }
       );
   }
