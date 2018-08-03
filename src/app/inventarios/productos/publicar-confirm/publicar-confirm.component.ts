@@ -10,34 +10,51 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./publicar-confirm.component.scss"]
 })
 export class PublicarConfirmComponent implements OnInit {
-  productosFiltrados: any[] = [];
   private alive: boolean = true;
-  data: any[] = [];
   filteredOptions: any = [];
   isLoadingResults: boolean = false;
-
+  stockDisponible: number = 0;
   constructor(
     public DialogRef: MatDialogRef<PublicarConfirmComponent>,
     private inventariosService: InventariosService,
     private toastr: ToastrService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {
-    this.inventariosService.currentDataProductos
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(res => {
-        this.data = res;
-      });
+  ngOnInit() {}
 
-      console.log(this.data);
+  revisarStock(cantidad) {
+    if (cantidad) {
+      for (let i = 0; i < this.data.products.length; i++) {
+        for (let j = 0; j < this.data.paquete.length; j++) {
+          if (this.data.products[i].Nombre == this.data.paquete[j].Nombre) {
+            if (
+              cantidad * this.data.paquete[j].Cantidad <=
+              this.data.products[i].Stock_actual
+            ) {
+              this.stockDisponible = 2;
+            } else {
+              this.stockDisponible = 1;
+              break;
+            }
+          }
+        }
+        if (this.stockDisponible == 1) {
+          break;
+        }
+      }
+    } else {
+      this.stockDisponible = 0;
+    }
   }
 
-  publicarPaq(){
-    //this.inventariosService.publicarPaquete();
+  publicarPaq() {
+    this.inventariosService.publicarPaquete(this.data.packData[0]);
+    this.DialogRef.close();
   }
 
-  cerrarModal() {
-    this.DialogRef.close("false");
+  onNoClick() {
+    this.DialogRef.close();
   }
 }

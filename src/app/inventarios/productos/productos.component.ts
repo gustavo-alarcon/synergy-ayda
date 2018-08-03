@@ -10,7 +10,7 @@ import { GenerarSerieComponent } from "./generar-serie/generar-serie.component";
 import { DeleteConfirmComponent } from "./delete-confirm/delete-confirm.component";
 import { NumSeriesComponent } from "./num-series/num-series.component";
 import { ToastrService } from "ngx-toastr";
-import { PublicarConfirmComponent } from './publicar-confirm/publicar-confirm.component';
+import { PublicarConfirmComponent } from "./publicar-confirm/publicar-confirm.component";
 
 @Component({
   selector: "app-productos",
@@ -141,7 +141,13 @@ export class ProductosComponent implements OnInit {
         this.pack_nombre = [];
         this.paquetes.forEach(element => {
           if (element["Paquete"] != _nombre) {
-            this.pack_nombre.push([element["Paquete"],element["Inversion"],element["Venta_pack"],element["Utilidad"], element["Publicar"]]);
+            this.pack_nombre.push([
+              element["Paquete"],
+              element["Inversion"],
+              element["Venta_pack"],
+              element["Utilidad"],
+              element["Publicar"]
+            ]);
             _nombre = element["Paquete"];
           }
         });
@@ -276,10 +282,14 @@ export class ProductosComponent implements OnInit {
     this.modData["Nombre"] = this.productosFiltrados[idx]["Nombre"];
     this.modData["Codigo"] = this.productosFiltrados[idx]["Codigo"];
     this.modData["Unidad"] = this.productosFiltrados[idx]["Unidad"];
-    this.modData["Stock_inicial"] = this.productosFiltrados[idx]["Stock_inicial"];
+    this.modData["Stock_inicial"] = this.productosFiltrados[idx][
+      "Stock_inicial"
+    ];
     this.modData["Stock_actual"] = this.productosFiltrados[idx]["Stock_actual"];
     this.modData["Stocke"] = this.productosFiltrados[idx]["Stocke"];
-    this.modData["Offset_stocka"] = this.productosFiltrados[idx]["Offset_stocka"];
+    this.modData["Offset_stocka"] = this.productosFiltrados[idx][
+      "Offset_stocka"
+    ];
     this.modData["Stocka"] = this.productosFiltrados[idx]["Stocka"];
     this.modData["Moneda"] = this.productosFiltrados[idx]["Moneda"];
     this.modData["Compra"] = this.productosFiltrados[idx]["Compra"];
@@ -362,7 +372,9 @@ export class ProductosComponent implements OnInit {
     this.modData_paquete["ID"] = this.paquetes[idx]["ID"];
     this.modData_paquete["Nombre"] = this.paquetes[idx]["Nombre"];
     this.modData_paquete["Cantidad"] = this.paquetes[idx]["Cantidad"];
-    this.modData_paquete["PrecioUnitario"] = this.paquetes[idx]["PrecioUnitario"];
+    this.modData_paquete["PrecioUnitario"] = this.paquetes[idx][
+      "PrecioUnitario"
+    ];
   }
 
   openImageModal(i) {
@@ -436,17 +448,35 @@ export class ProductosComponent implements OnInit {
     //Add 'implements OnDestroy' to the class.
     this.alive = false;
   }
-  
-  suspenderPaq(pack: any){
+
+  suspenderPaq(pack: any) {
     this.inventariosService.suspenderPaquete(pack[0]);
   }
 
-  openPublicarModal(pack: any){
+  openPublicarModal(pack: any) {
+    let productsInPaquete = [];
+    let paquete = [];
+    for (let i = 0; i < this.paquetes.length; i++) {
+      if (this.paquetes[i].Paquete == pack[0]) {
+        paquete.push(this.paquetes[i]);
+        for (let j = 0; j < this.filteredOptions.length; j++) {
+          if (
+            this.paquetes[i].Nombre == this.filteredOptions[j].Nombre &&
+            this.paquetes[i].Almacen == this.filteredOptions[j].Zona
+          ) {
+            productsInPaquete.push(this.filteredOptions[j]);
+            break;
+          }
+        }
+      }
+    }
     let dialogRef = this.dialog.open(PublicarConfirmComponent, {
       width: "auto",
       data: {
-        packData: pack
+        packData: pack,
+        products: productsInPaquete,
+        paquete: paquete
       }
-    })
+    });
   }
 }
