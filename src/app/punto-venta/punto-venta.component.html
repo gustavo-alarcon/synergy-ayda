@@ -122,7 +122,7 @@
                         <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
                             <mat-grid-tile-header>
                                 <mat-icon mat-grid-avatar>info_outline</mat-icon>
-                                Precio : S/. {{option.Venta}}
+                                Precio : S/. {{option.Venta_pack}}
                             </mat-grid-tile-header>
                             <span class="packageProducts">
                                 Productos :
@@ -160,23 +160,23 @@
                     </div>
                     <div *ngIf='productsOrPackages==1'>
                         <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
-                            <mat-grid-tile-header>
-                                <mat-icon mat-grid-avatar>info_outline</mat-icon>
-                                Precio : S/. {{option.Venta}}
-                            </mat-grid-tile-header>
-                            <span class="packageProducts">
-                                Productos :
-                                <span *ngFor="let product of option.Productos">
-                                    {{product.nombre}}
+                                <mat-grid-tile-header>
+                                    <mat-icon mat-grid-avatar>info_outline</mat-icon>
+                                    Precio : S/. {{option.Venta_pack}} {{ option.Publicar === '1'}}
+                                </mat-grid-tile-header>
+                                <span class="packageProducts">
+                                    Productos :
+                                    <span *ngFor="let product of option.Productos">
+                                        {{product.nombre}}
+                                    </span>
                                 </span>
-                            </span>
-                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
-                                alt=""> -->
-                            <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
-                            <mat-grid-tile-footer>
-                                <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}</h3>
-                                <mat-icon>star_border</mat-icon>
-                            </mat-grid-tile-footer>
+                                <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                                    alt=""> -->
+                                <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
+                                <mat-grid-tile-footer>
+                                    <h3 mat-line>{{ optionDisplay == 2 ? option.Codigo.toUpperCase() : option.Nombre }}</h3>
+                                    <mat-icon>star_border</mat-icon>
+                                </mat-grid-tile-footer>
                         </mat-grid-tile>
                     </div>
                 </mat-grid-list>

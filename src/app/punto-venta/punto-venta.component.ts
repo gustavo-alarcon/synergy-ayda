@@ -1454,7 +1454,7 @@ export class PuntoVentaComponent implements OnInit {
     let _position = 0;
     this.pack_nombre = [];
     for (let i = 0; i < this.paquetes_filtrado.length; i++) {
-      if (this.paquetes_filtrado[i].Paquete != _nombre) {
+      if (this.paquetes_filtrado[i].Paquete != _nombre && this.paquetes_filtrado[i].Publicar === '1') {
         this.pack_nombre.push({
           Nombre: this.paquetes_filtrado[i].Paquete,
           Venta:
@@ -1462,6 +1462,8 @@ export class PuntoVentaComponent implements OnInit {
             this.paquetes_filtrado[i].Cantidad,
           ID: this.paquetes_filtrado[i].ID,
           Moneda: this.paquetes_filtrado[i].Moneda,
+          Venta_pack: this.paquetes_filtrado[i].Venta_pack,
+          Publicar: this.paquetes_filtrado[i].Publicar,
           Productos: []
         });
         this.pack_nombre[this.pack_nombre.length - 1].Productos.push({
@@ -1489,7 +1491,9 @@ export class PuntoVentaComponent implements OnInit {
       }
     }
     this.filteredOptions = this.productos_filtrado;
+    
     this.filteredPackages = this.pack_nombre;
+    console.log(this.filteredPackages);
   }
 
   pushKeyProducts() {
