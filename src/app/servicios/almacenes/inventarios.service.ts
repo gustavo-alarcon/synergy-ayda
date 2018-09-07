@@ -371,7 +371,7 @@ export class InventariosService {
     let formData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);
     return this.http2.post(
-      "http://www.meraki-s.com/rent/ms-synergy/php/test/upload_image.php?db=" +
+      "http://www.meraki-s.com/rent/ms-synergy/php/test/upload_image_eyda.php?db=" +
         this.db,
       formData,
       { responseType: "text" }
@@ -818,13 +818,14 @@ export class InventariosService {
   }
 
   borrarPaquete(data: string) {
+    console.log(data);
     this.queryLoading(true);
     //this.http.post('http://localhost/meraki-rent/ms-synergy/src/app/servicios/almacenes/handler-paquetes-bor.php?db='+this.db, data)
     this.http2
       .post(
         "http://www.meraki-s.com/rent/ms-synergy/php/handler-paquetes-bor.php?db=" +
           this.db,
-        data,
+        data[0],
         { responseType: "text" }
       )
       .pipe(takeWhile(() => this.alive))

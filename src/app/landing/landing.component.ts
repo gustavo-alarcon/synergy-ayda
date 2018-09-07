@@ -10,6 +10,7 @@ import {
   query,
   stagger
 } from "@angular/animations";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-landing",
@@ -49,7 +50,8 @@ export class LandingComponent implements OnInit {
   false: boolean = false;
   constructor(
     private loginService: LoginService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -65,5 +67,9 @@ export class LandingComponent implements OnInit {
 
   createPage() {
     localStorage.setItem("page", "1");
+  }
+
+  mensaje(){
+    this.toastr.warning("Se esta desarrollando el nuevo modulo", "En desarrollo");
   }
 }

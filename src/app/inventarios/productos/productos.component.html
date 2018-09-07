@@ -152,7 +152,7 @@
               </td>
               <td *ngIf="!edit[i]['value'] && perms[0]['pro_b_editarProducto']" class="w3-right-align w3-border-left w3-border-right">
                 <span class="imgWrap" (click)="openImageModal(i)">
-                  <img *ngIf="row.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{row.Imagen}}"
+                  <img *ngIf="row.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{row.Imagen}}"
                     alt="Imagen del producto">
                   <img *ngIf="row.Imagen == '' || row.Imagen == null" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="Sin imagen">
                 </span>
@@ -221,7 +221,7 @@
                       <span>RELOAD</span>
                     </div>
                   </div> -->
-                  <img *ngIf="row.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{row.Imagen}}"
+                  <img *ngIf="row.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{row.Imagen}}"
                     alt="Imagen del producto">
                   <img *ngIf="row.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="Sin imagen">
                 </span>

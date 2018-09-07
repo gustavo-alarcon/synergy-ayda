@@ -27,3 +27,10 @@
 .hideButton {
   display: none;
 }
+
+.centerButton{
+  height: 80vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}

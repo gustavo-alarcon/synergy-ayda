@@ -29,7 +29,7 @@
                                 <mat-icon mat-grid-avatar>info_outline</mat-icon>
                                 Precio : S/. {{option.Venta}}
                             </mat-grid-tile-header>
-                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt="">
                             <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -50,7 +50,7 @@
                                     {{product.nombre}}
                                 </span>
                             </span>
-                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt=""> -->
                             <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -69,7 +69,7 @@
                                 <mat-icon mat-grid-avatar>info_outline</mat-icon>
                                 Precio : S/. {{option.Venta}}
                             </mat-grid-tile-header>
-                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt="">
                             <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -90,7 +90,7 @@
                                     {{product.nombre}}
                                 </span>
                             </span>
-                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt=""> -->
                             <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -109,7 +109,7 @@
                                 <mat-icon mat-grid-avatar>info_outline</mat-icon>
                                 Precio : S/. {{option.Venta}}
                             </mat-grid-tile-header>
-                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt="">
                             <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -130,7 +130,7 @@
                                     {{product.nombre}}
                                 </span>
                             </span>
-                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt=""> -->
                             <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -149,7 +149,7 @@
                                 <mat-icon mat-grid-avatar>info_outline</mat-icon>
                                 Precio : S/. {{option.Venta}}
                             </mat-grid-tile-header>
-                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                            <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                 alt="">
                             <img *ngIf="option.Imagen == ''" defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                             <mat-grid-tile-footer>
@@ -162,7 +162,7 @@
                         <mat-grid-tile @images (click)="addToList(i)" *ngFor="let option of filteredPackages ; let i = index">
                                 <mat-grid-tile-header>
                                     <mat-icon mat-grid-avatar>info_outline</mat-icon>
-                                    Precio : S/. {{option.Venta_pack}} {{ option.Publicar === '1'}}
+                                    Precio : S/. {{option.Venta_pack}}
                                 </mat-grid-tile-header>
                                 <span class="packageProducts">
                                     Productos :
@@ -170,7 +170,7 @@
                                         {{product.nombre}}
                                     </span>
                                 </span>
-                                <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/ms-synergy/{{bdParsed}}/img/{{option.Imagen}}"
+                                <!-- <img *ngIf="option.Imagen != ''" defaultImage='./assets/spinner.gif' lazyLoad="http://www.meraki-s.com/rent/synergy-laruta/{{bdParsed}}/img/{{option.Imagen}}"
                                     alt=""> -->
                                 <img defaultImage='./assets/spinner.gif' lazyLoad="./assets/nopic.png" alt="">
                                 <mat-grid-tile-footer>
